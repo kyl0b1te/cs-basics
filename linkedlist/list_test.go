@@ -6,20 +6,37 @@ import (
 
 func BenchmarkAppend(b *testing.B) {
 	list := NewList()
-
 	for i := 0; i < b.N; i++ {
-		list.Append(NewNode(i))
+		list.Append(i)
+	}
+}
+
+func BenchmarkPrepend(b *testing.B) {
+	list := NewList()
+	for i := 0; i < b.N; i++ {
+		list.Prepend(i)
 	}
 }
 
 func BenchmarkIndex(b *testing.B) {
 	list := NewList()
-	list.Append(NewNode(43))
-	list.Append(NewNode(37))
-	list.Append(NewNode(83))
+	list.Append(43)
+	list.Append(37)
+	list.Append(83)
 
 	for i := 0; i < b.N; i++ {
 		list.Index(37)
+	}
+}
+
+func BenchmarkFind(b *testing.B) {
+	list := NewList()
+	list.Append(43)
+	list.Append(37)
+	list.Append(83)
+
+	for i := 0; i < b.N; i++ {
+		list.Find(37)
 	}
 }
 
@@ -42,9 +59,7 @@ func TestNewNode(t *testing.T) {
 
 func TestAppendOneNode(t *testing.T) {
 	list := NewList()
-	node := NewNode(99)
-
-	list.Append(node)
+	node := list.Append(99)
 	if list.head != node {
 		t.Errorf("Expected list head is equals to `%x` for `%x`", node, list.head)
 	}
@@ -52,16 +67,16 @@ func TestAppendOneNode(t *testing.T) {
 
 func TestAppendMultipleNodes(t *testing.T) {
 	list := NewList()
-	nodes := [...]*Node{NewNode(10), NewNode(20), NewNode(30), NewNode(40)}
+	values := [...]int{10, 20, 30, 40}
 
-	for _, node := range nodes {
-		list.Append(node)
+	for _, value := range values {
+		list.Append(value)
 	}
 
 	listNode := list.head
-	for _, node := range nodes {
-		if listNode != node {
-			t.Fatalf("Expected list value is `%+v` actual `%+v`", node, listNode)
+	for _, value := range values {
+		if listNode.value != value {
+			t.Fatalf("Expected list value is `%+v` actual `%+v`", value, listNode.value)
 		}
 		listNode = listNode.next
 	}
@@ -79,7 +94,7 @@ func TestIndexOnFilledList(t *testing.T) {
 	nodes := [...]*Node{NewNode(12), NewNode(83), NewNode(43), NewNode(64)}
 
 	for _, node := range nodes {
-		list.Append(node)
+		list.Append(node.value)
 	}
 
 	var index int
@@ -92,7 +107,7 @@ func TestIndexOnFilledList(t *testing.T) {
 
 func TestIndexOfMissingNode(t *testing.T) {
 	list := NewList()
-	list.Append(NewNode(10))
+	list.Append(10)
 	if index := list.Index(99); index != -1 {
 		t.Errorf("Expected `%+v` actual `%+v`", -1, index)
 	}
@@ -100,21 +115,18 @@ func TestIndexOfMissingNode(t *testing.T) {
 
 func TestDeleteFirstNode(t *testing.T) {
 	list := NewList()
-	t10 := NewNode(10)
-	t20 := NewNode(20)
-	t30 := NewNode(30)
 
-	list.Append(t10)
-	list.Append(t20)
-	list.Append(t30)
+	list.Append(10)
+	list.Append(20)
+	list.Append(30)
 
 	list.Delete(10)
 
-	if list.head != t20 {
-		t.Errorf("Expected `%+v` actual `%+v`", t20, list.head)
+	if list.head.value != 20 {
+		t.Errorf("Expected `%+v` actual `%+v`", 20, list.head.value)
 	}
-	if list.head.next != t30 {
-		t.Errorf("Expected `%+v` actual `%+v`", t30, list.head.next)
+	if list.head.next.value != 30 {
+		t.Errorf("Expected `%+v` actual `%+v`", 30, list.head.next.value)
 	}
 	if list.head.next.next != nil {
 		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head.next.next)
@@ -123,21 +135,18 @@ func TestDeleteFirstNode(t *testing.T) {
 
 func TestDeleteMiddleNode(t *testing.T) {
 	list := NewList()
-	t10 := NewNode(10)
-	t20 := NewNode(20)
-	t30 := NewNode(30)
 
-	list.Append(t10)
-	list.Append(t20)
-	list.Append(t30)
+	list.Append(10)
+	list.Append(20)
+	list.Append(30)
 
 	list.Delete(20)
 
-	if list.head != t10 {
-		t.Errorf("Expected `%+v` actual `%+v`", t10, list.head)
+	if list.head.value != 10 {
+		t.Errorf("Expected `%+v` actual `%+v`", 10, list.head.value)
 	}
-	if list.head.next != t30 {
-		t.Errorf("Expected `%+v` actual `%+v`", t30, list.head.next)
+	if list.head.next.value != 30 {
+		t.Errorf("Expected `%+v` actual `%+v`", 30, list.head.next.value)
 	}
 	if list.head.next.next != nil {
 		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head.next.next)
@@ -146,26 +155,22 @@ func TestDeleteMiddleNode(t *testing.T) {
 
 func TestDeleteLastNode(t *testing.T) {
 	list := NewList()
-	t10 := NewNode(10)
-	t20 := NewNode(20)
-	t30 := NewNode(30)
-	t40 := NewNode(40)
 
-	list.Append(t10)
-	list.Append(t20)
-	list.Append(t30)
-	list.Append(t40)
+	list.Append(10)
+	list.Append(20)
+	list.Append(30)
+	list.Append(40)
 
 	list.Delete(40)
 
-	if list.head != t10 {
-		t.Errorf("Expected `%+v` actual `%+v`", t10, list.head)
+	if list.head.value != 10 {
+		t.Errorf("Expected `%+v` actual `%+v`", 10, list.head.value)
 	}
-	if list.head.next != t20 {
-		t.Errorf("Expected `%+v` actual `%+v`", t20, list.head.next)
+	if list.head.next.value != 20 {
+		t.Errorf("Expected `%+v` actual `%+v`", 20, list.head.next.value)
 	}
-	if list.head.next.next != t30 {
-		t.Errorf("Expected `%+v` actual `%+v`", t30, list.head.next.next)
+	if list.head.next.next.value != 30 {
+		t.Errorf("Expected `%+v` actual `%+v`", 30, list.head.next.next.value)
 	}
 	if list.head.next.next.next != nil {
 		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head.next.next.next)
@@ -175,9 +180,9 @@ func TestDeleteLastNode(t *testing.T) {
 func TestDeleteAllNodes(t *testing.T) {
 	list := NewList()
 
-	list.Append(NewNode(10))
-	list.Append(NewNode(10))
-	list.Append(NewNode(10))
+	list.Append(10)
+	list.Append(10)
+	list.Append(10)
 
 	list.Delete(10)
 
@@ -196,20 +201,20 @@ func TestDeleteOnEmptyList(t *testing.T) {
 
 func TestPrependOnEmptyList(t *testing.T) {
 	list := NewList()
-	list.Prepend(NewNode(10))
-	if list.head.value != 10 {
-		t.Errorf("Expected `%+v` actual `%+v`", 10, list.head.value)
+	node := list.Prepend(10)
+	if list.head != node {
+		t.Errorf("Expected `%+v` actual `%+v`", node, list.head)
 	}
 }
 
 func TestPrependOnFilledList(t *testing.T) {
 	list := NewList()
-	list.Append(NewNode(10))
-	list.Append(NewNode(20))
+	list.Append(10)
+	list.Append(20)
 
-	list.Prepend(NewNode(0))
-	if list.head.value != 0 {
-		t.Errorf("Expected `%+v` actual `%+v`", 0, list.head.value)
+	node := list.Prepend(0)
+	if list.head != node {
+		t.Errorf("Expected `%+v` actual `%+v`", node, list.head)
 	}
 	if list.head.next.value != 10 {
 		t.Errorf("Expected `%+v` actual `%+v`", 10, list.head.next.value)
@@ -219,5 +224,41 @@ func TestPrependOnFilledList(t *testing.T) {
 	}
 	if list.head.next.next.next != nil {
 		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head.next.next.next)
+	}
+}
+
+func TestFindOnEmptyList(t *testing.T) {
+	list := NewList()
+	if node := list.Find(34); node != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, node)
+	}
+}
+
+func TestFindNotExisting(t *testing.T) {
+	list := NewList()
+	list.Append(43)
+	if node := list.Find(34); node != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, node)
+	}
+}
+
+func TestFindExisting(t *testing.T) {
+	list := NewList()
+	list.Append(34)
+	if node := list.Find(34); node.value != 34 {
+		t.Errorf("Expected `%+v` actual `%+v`", 34, node.value)
+	}
+}
+
+func TestFindFirstFoundNode(t *testing.T) {
+	list := NewList()
+
+	list.Append(10)
+	test := list.Append(20)
+	list.Append(20)
+	list.Append(30)
+
+	if node := list.Find(20); node != test {
+		t.Errorf("Expected `%+v` actual `%+v`", test, node)
 	}
 }
