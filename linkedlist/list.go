@@ -3,11 +3,12 @@ package linkedlist
 // LinkedList represents linked list data structure itself
 type LinkedList struct {
 	head *Node
+	tail *Node
 }
 
 // NewList is a function for create new "instance" of linked list
 func NewList() LinkedList {
-	return LinkedList{nil}
+	return LinkedList{nil, nil}
 }
 
 // Index is a function for get first node index that has specific value
@@ -39,25 +40,25 @@ func (list LinkedList) Find(value int) *Node {
 
 // Append is a function for add new node into the end of linked list
 func (list *LinkedList) Append(value int) *Node {
+	node := NewNode(value)
 	if list.head == nil {
-		list.head = NewNode(value)
-		return list.head
+		list.head = node
+		list.tail = node
+		return node
 	}
-	listNode := list.head
-	for listNode.next != nil {
-		listNode = listNode.next
-	}
-	listNode.next = NewNode(value)
-	return listNode.next
+	previous := list.tail
+	previous.next = node
+	list.tail = node
+	return node
 }
 
 // Prepend is a function for add new node into the begging of linked list
 func (list *LinkedList) Prepend(value int) *Node {
+	node := NewNode(value)
 	if list.head == nil {
-		list.head = NewNode(value)
+		list.head = node
 		return list.head
 	}
-	node := NewNode(value)
 	node.next = list.head
 	list.head = node
 	return node

@@ -45,6 +45,9 @@ func TestNewList(t *testing.T) {
 	if list.head != nil {
 		t.Error("Expected list head is `nil` actual", list.head)
 	}
+	if list.tail != nil {
+		t.Error("Expected list tail is `nil` actual", list.tail)
+	}
 }
 
 func TestNewNode(t *testing.T) {
