@@ -42,11 +42,11 @@ func BenchmarkFind(b *testing.B) {
 
 func TestNewList(t *testing.T) {
 	list := NewList()
-	if list.head != nil {
-		t.Error("Expected list head is `nil` actual", list.head)
+	if list.Head != nil {
+		t.Error("Expected list Head is `nil` actual", list.Head)
 	}
-	if list.tail != nil {
-		t.Error("Expected list tail is `nil` actual", list.tail)
+	if list.Tail != nil {
+		t.Error("Expected list Tail is `nil` actual", list.Tail)
 	}
 }
 
@@ -63,8 +63,8 @@ func TestNewNode(t *testing.T) {
 func TestAppendOneNode(t *testing.T) {
 	list := NewList()
 	node := list.Append(99)
-	if list.head != node {
-		t.Errorf("Expected list head is equals to `%x` for `%x`", node, list.head)
+	if list.Head != node {
+		t.Errorf("Expected list Head is equals to `%x` for `%x`", node, list.Head)
 	}
 }
 
@@ -76,7 +76,7 @@ func TestAppendMultipleNodes(t *testing.T) {
 		list.Append(value)
 	}
 
-	listNode := list.head
+	listNode := list.Head
 	for _, value := range values {
 		if listNode.value != value {
 			t.Fatalf("Expected list value is `%+v` actual `%+v`", value, listNode.value)
@@ -125,14 +125,14 @@ func TestDeleteFirstNode(t *testing.T) {
 
 	list.Delete(10)
 
-	if list.head.value != 20 {
-		t.Errorf("Expected `%+v` actual `%+v`", 20, list.head.value)
+	if list.Head.value != 20 {
+		t.Errorf("Expected `%+v` actual `%+v`", 20, list.Head.value)
 	}
-	if list.head.next.value != 30 {
-		t.Errorf("Expected `%+v` actual `%+v`", 30, list.head.next.value)
+	if list.Head.next.value != 30 {
+		t.Errorf("Expected `%+v` actual `%+v`", 30, list.Head.next.value)
 	}
-	if list.head.next.next != nil {
-		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head.next.next)
+	if list.Head.next.next != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, list.Head.next.next)
 	}
 }
 
@@ -145,14 +145,14 @@ func TestDeleteMiddleNode(t *testing.T) {
 
 	list.Delete(20)
 
-	if list.head.value != 10 {
-		t.Errorf("Expected `%+v` actual `%+v`", 10, list.head.value)
+	if list.Head.value != 10 {
+		t.Errorf("Expected `%+v` actual `%+v`", 10, list.Head.value)
 	}
-	if list.head.next.value != 30 {
-		t.Errorf("Expected `%+v` actual `%+v`", 30, list.head.next.value)
+	if list.Head.next.value != 30 {
+		t.Errorf("Expected `%+v` actual `%+v`", 30, list.Head.next.value)
 	}
-	if list.head.next.next != nil {
-		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head.next.next)
+	if list.Head.next.next != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, list.Head.next.next)
 	}
 }
 
@@ -166,17 +166,17 @@ func TestDeleteLastNode(t *testing.T) {
 
 	list.Delete(40)
 
-	if list.head.value != 10 {
-		t.Errorf("Expected `%+v` actual `%+v`", 10, list.head.value)
+	if list.Head.value != 10 {
+		t.Errorf("Expected `%+v` actual `%+v`", 10, list.Head.value)
 	}
-	if list.head.next.value != 20 {
-		t.Errorf("Expected `%+v` actual `%+v`", 20, list.head.next.value)
+	if list.Head.next.value != 20 {
+		t.Errorf("Expected `%+v` actual `%+v`", 20, list.Head.next.value)
 	}
-	if list.head.next.next.value != 30 {
-		t.Errorf("Expected `%+v` actual `%+v`", 30, list.head.next.next.value)
+	if list.Head.next.next.value != 30 {
+		t.Errorf("Expected `%+v` actual `%+v`", 30, list.Head.next.next.value)
 	}
-	if list.head.next.next.next != nil {
-		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head.next.next.next)
+	if list.Head.next.next.next != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, list.Head.next.next.next)
 	}
 }
 
@@ -189,24 +189,24 @@ func TestDeleteAllNodes(t *testing.T) {
 
 	list.Delete(10)
 
-	if list.head != nil {
-		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head)
+	if list.Head != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, list.Head)
 	}
 }
 
 func TestDeleteOnEmptyList(t *testing.T) {
 	list := NewList()
 	list.Delete(43)
-	if list.head != nil {
-		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head)
+	if list.Head != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, list.Head)
 	}
 }
 
 func TestPrependOnEmptyList(t *testing.T) {
 	list := NewList()
 	node := list.Prepend(10)
-	if list.head != node {
-		t.Errorf("Expected `%+v` actual `%+v`", node, list.head)
+	if list.Head != node {
+		t.Errorf("Expected `%+v` actual `%+v`", node, list.Head)
 	}
 }
 
@@ -216,17 +216,17 @@ func TestPrependOnFilledList(t *testing.T) {
 	list.Append(20)
 
 	node := list.Prepend(0)
-	if list.head != node {
-		t.Errorf("Expected `%+v` actual `%+v`", node, list.head)
+	if list.Head != node {
+		t.Errorf("Expected `%+v` actual `%+v`", node, list.Head)
 	}
-	if list.head.next.value != 10 {
-		t.Errorf("Expected `%+v` actual `%+v`", 10, list.head.next.value)
+	if list.Head.next.value != 10 {
+		t.Errorf("Expected `%+v` actual `%+v`", 10, list.Head.next.value)
 	}
-	if list.head.next.next.value != 20 {
-		t.Errorf("Expected `%+v` actual `%+v`", 20, list.head.next.next.value)
+	if list.Head.next.next.value != 20 {
+		t.Errorf("Expected `%+v` actual `%+v`", 20, list.Head.next.next.value)
 	}
-	if list.head.next.next.next != nil {
-		t.Errorf("Expected `%+v` actual `%+v`", nil, list.head.next.next.next)
+	if list.Head.next.next.next != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, list.Head.next.next.next)
 	}
 }
 
@@ -263,5 +263,38 @@ func TestFindFirstFoundNode(t *testing.T) {
 
 	if node := list.Find(20); node != test {
 		t.Errorf("Expected `%+v` actual `%+v`", test, node)
+	}
+}
+
+func TestDeleteHeadOnEmptyList(t *testing.T) {
+	list := NewList()
+	if node := list.DeleteHead(); node != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, node)
+	}
+}
+
+func TestDeleteHeadOnFilledList(t *testing.T) {
+	list := NewList()
+	n10 := list.Append(10)
+	n20 := list.Append(20)
+	n30 := list.Append(30)
+
+	if node := list.DeleteHead(); node != n10 {
+		t.Errorf("Expected `%+v` actual `%+v`", n10, node)
+	}
+	if list.Head != n20 {
+		t.Errorf("Expected `%+v` actual `%+v`", n20, list.Head)
+	}
+	if node := list.DeleteHead(); node != n20 {
+		t.Errorf("Expected `%+v` actual `%+v`", n20, node)
+	}
+	if list.Head != n30 {
+		t.Errorf("Expected `%+v` actual `%+v`", n30, list.Head)
+	}
+	if node := list.DeleteHead(); node != n30 {
+		t.Errorf("Expected `%+v` actual `%+v`", n30, node)
+	}
+	if list.Head != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, list.Head)
 	}
 }

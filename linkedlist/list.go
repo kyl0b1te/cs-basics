@@ -2,8 +2,8 @@ package linkedlist
 
 // LinkedList represents linked list data structure itself
 type LinkedList struct {
-	head *Node
-	tail *Node
+	Head *Node
+	Tail *Node
 }
 
 // NewList is a function for create new "instance" of linked list
@@ -13,10 +13,10 @@ func NewList() LinkedList {
 
 // Index is a function for get first node index that has specific value
 func (list LinkedList) Index(value int) int {
-	if list.head == nil {
+	if list.Head == nil {
 		return -1
 	}
-	listNode := list.head
+	listNode := list.Head
 	for i := 0; listNode != nil; i++ {
 		if listNode.value == value {
 			return i
@@ -26,9 +26,9 @@ func (list LinkedList) Index(value int) int {
 	return -1
 }
 
-// Find is a funcation for get first node with specific value
+// Find is a function for get first node with specific value
 func (list LinkedList) Find(value int) *Node {
-	listNode := list.head
+	listNode := list.Head
 	for listNode != nil {
 		if listNode.value == value {
 			return listNode
@@ -41,41 +41,41 @@ func (list LinkedList) Find(value int) *Node {
 // Append is a function for add new node into the end of linked list
 func (list *LinkedList) Append(value int) *Node {
 	node := NewNode(value)
-	if list.head == nil {
-		list.head = node
-		list.tail = node
+	if list.Head == nil {
+		list.Head = node
+		list.Tail = node
 		return node
 	}
-	previous := list.tail
+	previous := list.Tail
 	previous.next = node
-	list.tail = node
+	list.Tail = node
 	return node
 }
 
 // Prepend is a function for add new node into the begging of linked list
 func (list *LinkedList) Prepend(value int) *Node {
 	node := NewNode(value)
-	if list.head == nil {
-		list.head = node
-		return list.head
+	if list.Head == nil {
+		list.Head = node
+		return list.Head
 	}
-	node.next = list.head
-	list.head = node
+	node.next = list.Head
+	list.Head = node
 	return node
 }
 
 // Delete is a function for delete node(s) from the linked list
 func (list *LinkedList) Delete(value int) {
-	if list.head == nil {
+	if list.Head == nil {
 		return
 	}
 
 	// Remove nodes from the begging of the list
-	for list.head != nil && list.head.value == value {
-		list.head = list.head.next
+	for list.Head != nil && list.Head.value == value {
+		list.Head = list.Head.next
 	}
 
-	listNode := list.head
+	listNode := list.Head
 	for listNode != nil {
 		if listNode.next != nil && listNode.next.value == value {
 			if listNode.next.next != nil {
@@ -88,4 +88,14 @@ func (list *LinkedList) Delete(value int) {
 		}
 		listNode = listNode.next
 	}
+}
+
+// DeleteHead is a function for remove list head element
+func (list *LinkedList) DeleteHead() *Node {
+	if list.Head == nil {
+		return nil
+	}
+	head := list.Head
+	list.Head = head.next
+	return head
 }
