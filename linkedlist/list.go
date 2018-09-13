@@ -1,17 +1,17 @@
 package linkedlist
 
-// LinkedList represents linked list data structure itself
+// LinkedList represents abstract data structure
 type LinkedList struct {
 	Head *Node
 	Tail *Node
 }
 
-// NewList is a function for create new "instance" of linked list
+// NewList is a function that creates a new "instance" of linked list
 func NewList() LinkedList {
 	return LinkedList{nil, nil}
 }
 
-// Index is a function for get first node index that has specific value
+// Index is a function that gets index of first node where value equal index
 func (list LinkedList) Index(value int) int {
 	if list.Head == nil {
 		return -1
@@ -26,7 +26,7 @@ func (list LinkedList) Index(value int) int {
 	return -1
 }
 
-// Find is a function for get first node with specific value
+// Find is a function that gets a first node with specific value
 func (list LinkedList) Find(value int) *Node {
 	listNode := list.Head
 	for listNode != nil {
@@ -38,7 +38,7 @@ func (list LinkedList) Find(value int) *Node {
 	return nil
 }
 
-// Append is a function for add new node into the end of linked list
+// Append is a function that add new node into the end of linked list
 func (list *LinkedList) Append(value int) *Node {
 	node := NewNode(value)
 	if list.Head == nil {
@@ -52,7 +52,7 @@ func (list *LinkedList) Append(value int) *Node {
 	return node
 }
 
-// Prepend is a function for add new node into the begging of linked list
+// Prepend is a function that add new node into the begging of linked list
 func (list *LinkedList) Prepend(value int) *Node {
 	node := NewNode(value)
 	if list.Head == nil {
@@ -64,7 +64,7 @@ func (list *LinkedList) Prepend(value int) *Node {
 	return node
 }
 
-// Delete is a function for delete node(s) from the linked list
+// Delete is a function that removes node(s) from the linked list
 func (list *LinkedList) Delete(value int) {
 	if list.Head == nil {
 		return
@@ -90,7 +90,7 @@ func (list *LinkedList) Delete(value int) {
 	}
 }
 
-// DeleteHead is a function for remove list head element
+// DeleteHead is a function that removes list head
 func (list *LinkedList) DeleteHead() *Node {
 	if list.Head == nil {
 		return nil

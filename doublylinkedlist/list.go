@@ -1,17 +1,17 @@
 package doublylinkedlist
 
-// DoublyLinkedList represents doubly linked list data structure itself
+// DoublyLinkedList represents abstract data structure
 type DoublyLinkedList struct {
 	head *Node
 	tail *Node
 }
 
-// NewList is a function for create new "instance" of doubly linked list
+// NewList is a function that creates a new "instance" of linked list
 func NewList() DoublyLinkedList {
 	return DoublyLinkedList{nil, nil}
 }
 
-// Index is a function for get first node index that has specific value
+// Index is a function that gets index of first node where value equal index
 func (list DoublyLinkedList) Index(value int) int {
 	if list.head == nil {
 		return -1
@@ -26,7 +26,7 @@ func (list DoublyLinkedList) Index(value int) int {
 	return -1
 }
 
-// Find is a function for get first node with specific value
+// Find is a function that gets a first node with specific value
 func (list DoublyLinkedList) Find(value int) *Node {
 	listNode := list.head
 	for listNode != nil {
@@ -38,7 +38,7 @@ func (list DoublyLinkedList) Find(value int) *Node {
 	return nil
 }
 
-// Append is a function for add new node into the end of linked list
+// Append is a function that add new node into the end of linked list
 func (list *DoublyLinkedList) Append(value int) *Node {
 	node := NewNode(value)
 	if list.head == nil {
@@ -53,7 +53,7 @@ func (list *DoublyLinkedList) Append(value int) *Node {
 	return node
 }
 
-// Prepend is a function for add new node into the begging of linked list
+// Prepend is a function that add new node into the begging of linked list
 func (list *DoublyLinkedList) Prepend(value int) *Node {
 	node := NewNode(value)
 	if list.tail == nil {
@@ -68,7 +68,7 @@ func (list *DoublyLinkedList) Prepend(value int) *Node {
 	return node
 }
 
-// Delete is a function for delete node(s) from the linked list
+// Delete is a function that removes node(s) from the linked list
 func (list *DoublyLinkedList) Delete(value int) {
 	if list.head == nil {
 		return
