@@ -2,11 +2,11 @@ package linkedlist
 
 // Node represents linked list node element
 type Node struct {
-	value int
+	value interface{}
 	next  *Node
 }
 
 // NewNode is function to create a new node for linked list
-func NewNode(value int) *Node {
+func NewNode(value interface{}) *Node {
 	return &Node{value, nil}
 }

@@ -32,8 +32,9 @@ func TestPush(t *testing.T) {
 	if stack.list.Head != n10 {
 		t.Errorf("Expected '%+v' actual '%+v'", n10, stack.list.Head)
 	}
-	if stack.Push(20); stack.list.Head != n10 {
-		t.Errorf("Expected '%+v' actual '%+v'", n10, stack.list.Head)
+	n20 := stack.Push(20)
+	if stack.list.Head != n20 {
+		t.Errorf("Expected '%+v' actual '%+v'", n20, stack.list.Head)
 	}
 }
 

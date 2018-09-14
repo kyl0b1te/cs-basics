@@ -5,21 +5,21 @@ import (
 )
 
 func BenchmarkAppend(b *testing.B) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	for i := 0; i < b.N; i++ {
 		list.Append(i)
 	}
 }
 
 func BenchmarkPrepend(b *testing.B) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	for i := 0; i < b.N; i++ {
 		list.Prepend(i)
 	}
 }
 
 func BenchmarkIndex(b *testing.B) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	list.Append(43)
 	list.Append(37)
 	list.Append(83)
@@ -30,7 +30,7 @@ func BenchmarkIndex(b *testing.B) {
 }
 
 func BenchmarkFind(b *testing.B) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	list.Append(43)
 	list.Append(37)
 	list.Append(83)
@@ -41,7 +41,7 @@ func BenchmarkFind(b *testing.B) {
 }
 
 func TestNewList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	if list.Head != nil {
 		t.Error("Expected list Head is `nil` actual", list.Head)
 	}
@@ -61,7 +61,7 @@ func TestNewNode(t *testing.T) {
 }
 
 func TestAppendOneNode(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	node := list.Append(99)
 	if list.Head != node {
 		t.Errorf("Expected list Head is equals to `%x` for `%x`", node, list.Head)
@@ -69,7 +69,7 @@ func TestAppendOneNode(t *testing.T) {
 }
 
 func TestAppendMultipleNodes(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	values := [...]int{10, 20, 30, 40}
 
 	for _, value := range values {
@@ -86,14 +86,14 @@ func TestAppendMultipleNodes(t *testing.T) {
 }
 
 func TestIndexOnEmptyList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	if index := list.Index(99); index != -1 {
 		t.Errorf("Expected `%+v` actual `%+v`", -1, index)
 	}
 }
 
 func TestIndexOnFilledList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	nodes := [...]*Node{NewNode(12), NewNode(83), NewNode(43), NewNode(64)}
 
 	for _, node := range nodes {
@@ -109,7 +109,7 @@ func TestIndexOnFilledList(t *testing.T) {
 }
 
 func TestIndexOfMissingNode(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	list.Append(10)
 	if index := list.Index(99); index != -1 {
 		t.Errorf("Expected `%+v` actual `%+v`", -1, index)
@@ -117,7 +117,7 @@ func TestIndexOfMissingNode(t *testing.T) {
 }
 
 func TestDeleteFirstNode(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 
 	list.Append(10)
 	list.Append(20)
@@ -137,7 +137,7 @@ func TestDeleteFirstNode(t *testing.T) {
 }
 
 func TestDeleteMiddleNode(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 
 	list.Append(10)
 	list.Append(20)
@@ -157,7 +157,7 @@ func TestDeleteMiddleNode(t *testing.T) {
 }
 
 func TestDeleteLastNode(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 
 	list.Append(10)
 	list.Append(20)
@@ -181,7 +181,7 @@ func TestDeleteLastNode(t *testing.T) {
 }
 
 func TestDeleteAllNodes(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 
 	list.Append(10)
 	list.Append(10)
@@ -195,7 +195,7 @@ func TestDeleteAllNodes(t *testing.T) {
 }
 
 func TestDeleteOnEmptyList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	list.Delete(43)
 	if list.Head != nil {
 		t.Errorf("Expected `%+v` actual `%+v`", nil, list.Head)
@@ -203,7 +203,7 @@ func TestDeleteOnEmptyList(t *testing.T) {
 }
 
 func TestPrependOnEmptyList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	node := list.Prepend(10)
 	if list.Head != node {
 		t.Errorf("Expected `%+v` actual `%+v`", node, list.Head)
@@ -211,7 +211,7 @@ func TestPrependOnEmptyList(t *testing.T) {
 }
 
 func TestPrependOnFilledList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	list.Append(10)
 	list.Append(20)
 
@@ -231,14 +231,14 @@ func TestPrependOnFilledList(t *testing.T) {
 }
 
 func TestFindOnEmptyList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	if node := list.Find(34); node != nil {
 		t.Errorf("Expected `%+v` actual `%+v`", nil, node)
 	}
 }
 
 func TestFindNotExisting(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	list.Append(43)
 	if node := list.Find(34); node != nil {
 		t.Errorf("Expected `%+v` actual `%+v`", nil, node)
@@ -246,7 +246,7 @@ func TestFindNotExisting(t *testing.T) {
 }
 
 func TestFindExisting(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	list.Append(34)
 	if node := list.Find(34); node.value != 34 {
 		t.Errorf("Expected `%+v` actual `%+v`", 34, node.value)
@@ -254,7 +254,7 @@ func TestFindExisting(t *testing.T) {
 }
 
 func TestFindFirstFoundNode(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 
 	list.Append(10)
 	test := list.Append(20)
@@ -267,14 +267,14 @@ func TestFindFirstFoundNode(t *testing.T) {
 }
 
 func TestDeleteHeadOnEmptyList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	if node := list.DeleteHead(); node != nil {
 		t.Errorf("Expected `%+v` actual `%+v`", nil, node)
 	}
 }
 
 func TestDeleteHeadOnFilledList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	n10 := list.Append(10)
 	n20 := list.Append(20)
 	n30 := list.Append(30)
@@ -300,7 +300,7 @@ func TestDeleteHeadOnFilledList(t *testing.T) {
 }
 
 func TestMapOnEmptyList(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	res := list.Map(func(node *Node) bool {
 		return node.value == 1
 	})
@@ -310,7 +310,7 @@ func TestMapOnEmptyList(t *testing.T) {
 }
 
 func TestMapWithFalsyPredicate(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	nodes := [...]*Node{list.Append(10), list.Append(20)}
 
 	counter := 0
@@ -328,7 +328,7 @@ func TestMapWithFalsyPredicate(t *testing.T) {
 }
 
 func TestMapWithTruePredicate(t *testing.T) {
-	list := NewList()
+	list := NewList(DefaultCompare)
 	list.Append(10)
 	n20 := list.Append(20)
 

@@ -9,7 +9,7 @@ type Stack struct {
 
 // NewStack is a function that creates a new Stack
 func NewStack() *Stack {
-	list := linkedlist.NewList()
+	list := linkedlist.NewList(linkedlist.DefaultCompare)
 	return &Stack{list: &list}
 }
 

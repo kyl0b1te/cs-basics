@@ -9,7 +9,7 @@ type Queue struct {
 
 // NewQueue is a function that creates a new queue
 func NewQueue() *Queue {
-	list := linkedlist.NewList()
+	list := linkedlist.NewList(linkedlist.DefaultCompare)
 	return &Queue{list: &list}
 }
 

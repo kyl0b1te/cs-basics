@@ -2,23 +2,31 @@ package linkedlist
 
 // LinkedList represents abstract data structure
 type LinkedList struct {
-	Head *Node
-	Tail *Node
+	Head    *Node
+	Tail    *Node
+	isEqual func(a, b interface{}) bool
 }
 
 // NewList is a function that creates a new "instance" of linked list
-func NewList() LinkedList {
-	return LinkedList{nil, nil}
+func NewList(compare func(a, b interface{}) bool) LinkedList {
+	return LinkedList{nil, nil, compare}
+}
+
+// DefaultCompare is a function that represents integer comparassion
+func DefaultCompare(a, b interface{}) bool {
+	aInt := a.(int)
+	bInt := b.(int)
+	return aInt == bInt
 }
 
 // Index is a function that gets index of first node where value equal index
-func (list LinkedList) Index(value int) int {
+func (list LinkedList) Index(value interface{}) int {
 	if list.Head == nil {
 		return -1
 	}
 	listNode := list.Head
 	for i := 0; listNode != nil; i++ {
-		if listNode.value == value {
+		if list.isEqual(listNode.value, value) {
 			return i
 		}
 		listNode = listNode.next
@@ -30,7 +38,7 @@ func (list LinkedList) Index(value int) int {
 func (list LinkedList) Find(value int) *Node {
 	listNode := list.Head
 	for listNode != nil {
-		if listNode.value == value {
+		if list.isEqual(listNode.value, value) {
 			return listNode
 		}
 		listNode = listNode.next
@@ -39,7 +47,7 @@ func (list LinkedList) Find(value int) *Node {
 }
 
 // Append is a function that add new node into the end of linked list
-func (list *LinkedList) Append(value int) *Node {
+func (list *LinkedList) Append(value interface{}) *Node {
 	node := NewNode(value)
 	if list.Head == nil {
 		list.Head = node
@@ -71,13 +79,13 @@ func (list *LinkedList) Delete(value int) {
 	}
 
 	// Remove nodes from the begging of the list
-	for list.Head != nil && list.Head.value == value {
+	for list.Head != nil && list.isEqual(list.Head.value, value) {
 		list.Head = list.Head.next
 	}
 
 	listNode := list.Head
 	for listNode != nil {
-		if listNode.next != nil && listNode.next.value == value {
+		if listNode.next != nil && list.isEqual(listNode.next.value, value) {
 			if listNode.next.next != nil {
 				// Next for current node equal to the node after next one
 				listNode.next = listNode.next.next
