@@ -298,3 +298,45 @@ func TestDeleteHeadOnFilledList(t *testing.T) {
 		t.Errorf("Expected `%+v` actual `%+v`", nil, list.Head)
 	}
 }
+
+func TestMapOnEmptyList(t *testing.T) {
+	list := NewList()
+	res := list.Map(func(node *Node) bool {
+		return node.value == 1
+	})
+	if res != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, res)
+	}
+}
+
+func TestMapWithFalsyPredicate(t *testing.T) {
+	list := NewList()
+	nodes := [...]*Node{list.Append(10), list.Append(20)}
+
+	counter := 0
+	res := list.Map(func(node *Node) bool {
+		if nodes[counter] != node {
+			t.Errorf("Expected `%+v` actual `%+v`", nodes[counter], node)
+		}
+		counter++
+		return false
+	})
+
+	if res != nil {
+		t.Errorf("Expected `%+v` actual `%+v`", nil, res)
+	}
+}
+
+func TestMapWithTruePredicate(t *testing.T) {
+	list := NewList()
+	list.Append(10)
+	n20 := list.Append(20)
+
+	res := list.Map(func(node *Node) bool {
+		return node == n20
+	})
+
+	if res != n20 {
+		t.Errorf("Expected `%+v` actual `%+v`", n20, res)
+	}
+}

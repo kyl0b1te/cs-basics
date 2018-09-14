@@ -99,3 +99,18 @@ func (list *LinkedList) DeleteHead() *Node {
 	list.Head = head.next
 	return head
 }
+
+// Map is a function that iterate through list via custom predicate function
+func (list LinkedList) Map(predicate func(*Node) bool) *Node {
+	if list.Head == nil {
+		return nil
+	}
+	listNode := list.Head
+	for listNode != nil {
+		if predicate(listNode) == true {
+			return listNode
+		}
+		listNode = listNode.next
+	}
+	return nil
+}
