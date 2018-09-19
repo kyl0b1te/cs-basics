@@ -2,7 +2,7 @@ package linkedlist
 
 // Node represents linked list node element
 type Node struct {
-	value interface{}
+	Value interface{}
 	next  *Node
 }
 

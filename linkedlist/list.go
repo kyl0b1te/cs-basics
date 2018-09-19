@@ -26,7 +26,7 @@ func (list LinkedList) Index(value interface{}) int {
 	}
 	listNode := list.Head
 	for i := 0; listNode != nil; i++ {
-		if list.isEqual(listNode.value, value) {
+		if list.isEqual(listNode.Value, value) {
 			return i
 		}
 		listNode = listNode.next
@@ -38,7 +38,7 @@ func (list LinkedList) Index(value interface{}) int {
 func (list LinkedList) Find(value int) *Node {
 	listNode := list.Head
 	for listNode != nil {
-		if list.isEqual(listNode.value, value) {
+		if list.isEqual(listNode.Value, value) {
 			return listNode
 		}
 		listNode = listNode.next
@@ -79,13 +79,13 @@ func (list *LinkedList) Delete(value int) {
 	}
 
 	// Remove nodes from the begging of the list
-	for list.Head != nil && list.isEqual(list.Head.value, value) {
+	for list.Head != nil && list.isEqual(list.Head.Value, value) {
 		list.Head = list.Head.next
 	}
 
 	listNode := list.Head
 	for listNode != nil {
-		if listNode.next != nil && list.isEqual(listNode.next.value, value) {
+		if listNode.next != nil && list.isEqual(listNode.next.Value, value) {
 			if listNode.next.next != nil {
 				// Next for current node equal to the node after next one
 				listNode.next = listNode.next.next
