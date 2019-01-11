@@ -42,3 +42,7 @@ List of data realized data structures:
     A heap is a specialized tree-based data structure which is essentially an almost complete tree that satisfies the heap property:
     if *P* is a parent node of *C*, then the key (the value) of *P* is either greater than or equal to (in a max heap) or less than or equal to (in a min heap) the key of *C*.
     _([wikipedia](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=2ahUKEwj2oNvYmObfAhWpd98KHZkNAwkQFjACegQIBhAK&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FHeap_(data_structure)&usg=AOvVaw1G_jbAavnc1nT0nQUqPzII))_
+
+## Summary
+
+Project is in "work in progress" stage, I'll continue add a new data structures here.
