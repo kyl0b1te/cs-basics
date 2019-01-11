@@ -27,15 +27,18 @@ List of data realized data structures:
     _([wikipedia](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=29&cad=rja&uact=8&ved=2ahUKEwiYqcXxl-bfAhWMnOAKHW02CYwQmhMwHHoECAcQAg&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FQueue_(abstract_data_type)&usg=AOvVaw1BO0VgZx0kEjEbyNKGm-AY))_
 
 - *[Stack](https://github.com/zhikiri/data-structs/tree/master/Stack)*
+
     A stack is an abstract data type that serves as a collection of elements, with two principal operations: push, which adds an element to the collection, and pop, which removes the most recently added element that was not yet removed.
     _([wikipedia](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=33&cad=rja&uact=8&ved=2ahUKEwiXvr-2mObfAhXvmuAKHYRGAz8QmhMwIHoECAQQAg&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FStack_(abstract_data_type)&usg=AOvVaw11tsNRtwLwvkwPHi2ztl4s))_
 
 - [HashMap](https://github.com/zhikiri/data-structs/tree/master/HashMap)
+
     A hashmap is a general-purpose data structure for storing a group of objects.
     A dictionary (a.k.a hashmap) has a set of keys and each key has a single associated value.
     _([wikipedia](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&uact=8&ved=2ahUKEwiZn9WnmebfAhXGnuAKHaTjB9MQFjABegQIABAE&url=https%3A%2F%2Fen.wikibooks.org%2Fwiki%2FA-level_Computing%2FAQA%2FPaper_1%2FFundamentals_of_data_structures%2FDictionaries&usg=AOvVaw2-AeG29RAM_OsSDv5c2EMA))_
 
 - [Heap](https://github.com/zhikiri/data-structs/tree/master/Heap)
+
     A heap is a specialized tree-based data structure which is essentially an almost complete tree that satisfies the heap property:
     if *P* is a parent node of *C*, then the key (the value) of *P* is either greater than or equal to (in a max heap) or less than or equal to (in a min heap) the key of *C*.
     _([wikipedia](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=2ahUKEwj2oNvYmObfAhWpd98KHZkNAwkQFjACegQIBhAK&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FHeap_(data_structure)&usg=AOvVaw1G_jbAavnc1nT0nQUqPzII))_
