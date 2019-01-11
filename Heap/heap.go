@@ -4,23 +4,6 @@ import (
 	"math"
 )
 
-/*
- - a[1, 2, 3, 17, 19, 36, 7]
-
-	left: 		(2 * n) + 1;
-	right: 		(2 * n) + 2;
-	parent: 	(n / 2) - 1|2
-
- - 2 left:  (2 * 1) + 1 = a[3] (17)
- - 2 right: (2 * 1) + 2 = a[4] (19)
-
- - a[2] parent: (2 / 1):2 - 1 = a[1] (2)
- - a[3] parent: (3 / 2):2 - 1 = a[1] (2)
- - a[4] parent: (4 / 2):2 - 1 = a[1] (2)
- - a[5] parent: (5 / 2):3 - 1 = a[2] (3)
- - a[6] parent: (6 / 2):3 - 1 = a[2] (3)
-*/
-
 // Heap represents abstract data structure
 type Heap struct {
 	values []int

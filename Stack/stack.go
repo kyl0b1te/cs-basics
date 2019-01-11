@@ -1,6 +1,6 @@
 package stack
 
-import "github.com/zhikiri/data-structs/LinkedList"
+import "github.com/zhikiri/data-structures/LinkedList"
 
 // Stack represents abstract data structure
 type Stack struct {

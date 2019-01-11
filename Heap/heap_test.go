@@ -7,7 +7,7 @@ import (
 func TestNewHeap(t *testing.T) {
 	heap := NewHeap()
 	if len(heap.values) != 0 {
-		t.Error("Stack should not be empty")
+		t.Error("Heap should not be empty")
 	}
 }
 

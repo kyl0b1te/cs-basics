@@ -3,7 +3,7 @@ package hashmap
 import (
 	"testing"
 
-	"github.com/zhikiri/data-structs/LinkedList"
+	"github.com/zhikiri/data-structures/LinkedList"
 )
 
 func TestNewHashMapWithZeroLen(t *testing.T) {
