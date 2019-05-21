@@ -53,3 +53,38 @@ func TestInsertRootChildren(t *testing.T) {
 		t.Errorf("Expected '%+v' actual '%+v'", 15, tree.Root.Right.Value)
 	}
 }
+
+func TestContainsOnEmptyTree(t *testing.T) {
+	tree := NewBinaryTree()
+	if contains := tree.Contains(NewNode(2, nil, nil)); contains != false {
+		t.Errorf("Expected '%+v' actual '%+v'", contains, false)
+	}
+}
+
+func TestContainsOnExistingChild(t *testing.T) {
+	tree := NewBinaryTree()
+	for _, node := range getNodes(4, 8, 2) {
+		tree.Insert(node)
+	}
+
+	if contains := tree.Contains(NewNode(2, nil, nil)); contains != true {
+		t.Errorf("Expected '%+v' actual '%+v'", contains, true)
+	}
+	if contains := tree.Contains(NewNode(4, nil, nil)); contains != true {
+		t.Errorf("Expected '%+v' actual '%+v'", contains, true)
+	}
+	if contains := tree.Contains(NewNode(8, nil, nil)); contains != true {
+		t.Errorf("Expected '%+v' actual '%+v'", contains, true)
+	}
+}
+
+func TestContainsOnMissingChild(t *testing.T) {
+	tree := NewBinaryTree()
+	for _, node := range getNodes(4, 8, 2) {
+		tree.Insert(node)
+	}
+
+	if contains := tree.Contains(NewNode(5, nil, nil)); contains != false {
+		t.Errorf("Expected '%+v' actual '%+v'", contains, false)
+	}
+}
