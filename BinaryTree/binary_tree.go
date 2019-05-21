@@ -28,27 +28,27 @@ func (t *BinaryTree) Contains(value int) bool {
 	if t.Root == nil {
 		return false
 	}
-	return t.containsNode(t.Root, value)
+	return t.search(t.Root, value) != nil
 }
 
 func (t *BinaryTree) Find(value int) *Node {
 	if t.Root == nil {
 		return nil
 	}
-	return nil
+	return t.search(t.Root, value)
 }
 
-func (t BinaryTree) containsNode(current *Node, value int) bool {
+func (t BinaryTree) search(current *Node, value int) *Node {
 	if value > current.Value && current.Right != nil {
-		return t.containsNode(current.Right, value)
+		return t.search(current.Right, value)
 	}
 	if value < current.Value && current.Left != nil {
-		return t.containsNode(current.Left, value)
+		return t.search(current.Left, value)
 	}
 	if value == current.Value {
-		return true
+		return current
 	}
-	return false
+	return nil
 }
 
 func (t BinaryTree) insertNode(current *Node, node *Node) {

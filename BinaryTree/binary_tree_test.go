@@ -84,3 +84,12 @@ func TestFindOnMissingChild(t *testing.T) {
 		t.Errorf("Expected '%+v' actual '%+v'", node, nil)
 	}
 }
+
+func TestFindOnExistingChild(t *testing.T) {
+	tree := NewBinaryTree(getNodes(4, 8, 2)...)
+	for _, value := range [3]int{2, 4, 8} {
+		if node := tree.Find(value); node == nil {
+			t.Errorf("Expected '%+v' to not be nil", node)
+		}
+	}
+}
