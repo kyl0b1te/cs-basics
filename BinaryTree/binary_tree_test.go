@@ -30,12 +30,7 @@ func TestInsertRoot(t *testing.T) {
 }
 
 func TestInsertRootChildren(t *testing.T) {
-	tree := NewBinaryTree()
-	nodes := getNodes(10, 5, 15)
-
-	for _, node := range nodes {
-		tree.Insert(node)
-	}
+	tree := NewBinaryTree(getNodes(10, 5, 15)...)
 
 	node := tree.Root
 	for _, value := range [3]int{10, 5, 15} {
@@ -61,11 +56,7 @@ func TestContainsOnEmptyTree(t *testing.T) {
 }
 
 func TestContainsOnExistingChild(t *testing.T) {
-	tree := NewBinaryTree()
-	for _, node := range getNodes(4, 8, 2) {
-		tree.Insert(node)
-	}
-
+	tree := NewBinaryTree(getNodes(4, 8, 2)...)
 	for _, val := range [3]int{2, 4, 8} {
 		if contains := tree.Contains(val); contains != true {
 			t.Errorf("Expected '%+v' actual '%+v'", contains, true)
@@ -74,12 +65,22 @@ func TestContainsOnExistingChild(t *testing.T) {
 }
 
 func TestContainsOnMissingChild(t *testing.T) {
-	tree := NewBinaryTree()
-	for _, node := range getNodes(4, 8, 2) {
-		tree.Insert(node)
-	}
-
+	tree := NewBinaryTree(getNodes(4, 8, 2)...)
 	if contains := tree.Contains(5); contains != false {
 		t.Errorf("Expected '%+v' actual '%+v'", contains, false)
+	}
+}
+
+func TestFindOnEmptyTree(t *testing.T) {
+	tree := NewBinaryTree()
+	if node := tree.Find(5); node != nil {
+		t.Errorf("Expected '%+v' actual '%+v'", node, nil)
+	}
+}
+
+func TestFindOnMissingChild(t *testing.T) {
+	tree := NewBinaryTree(getNodes(4, 8, 2)...)
+	if node := tree.Find(5); node != nil {
+		t.Errorf("Expected '%+v' actual '%+v'", node, nil)
 	}
 }

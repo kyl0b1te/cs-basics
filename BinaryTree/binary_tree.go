@@ -4,8 +4,16 @@ type BinaryTree struct {
 	Root *Node
 }
 
-func NewBinaryTree() BinaryTree {
-	return BinaryTree{nil}
+func NewBinaryTree(nodes ...*Node) BinaryTree {
+	if len(nodes) == 0 {
+		return BinaryTree{nil}
+	}
+
+	tree := BinaryTree{nil}
+	for _, node := range nodes {
+		tree.Insert(node)
+	}
+	return tree
 }
 
 func (t *BinaryTree) Insert(node *Node) {
@@ -21,6 +29,13 @@ func (t *BinaryTree) Contains(value int) bool {
 		return false
 	}
 	return t.containsNode(t.Root, value)
+}
+
+func (t *BinaryTree) Find(value int) *Node {
+	if t.Root == nil {
+		return nil
+	}
+	return nil
 }
 
 func (t BinaryTree) containsNode(current *Node, value int) bool {
