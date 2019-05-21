@@ -16,21 +16,21 @@ func (t *BinaryTree) Insert(node *Node) {
 	t.insertNode(t.Root, node)
 }
 
-func (t BinaryTree) Contains(node *Node) bool {
+func (t BinaryTree) Contains(value int) bool {
 	if t.Root == nil {
 		return false
 	}
-	return t.containsNode(t.Root, node)
+	return t.containsNode(t.Root, value)
 }
 
-func (t BinaryTree) containsNode(current *Node, node *Node) bool {
-	if node.Value > current.Value && current.Right != nil {
-		return t.containsNode(current.Right, node)
+func (t BinaryTree) containsNode(current *Node, value int) bool {
+	if value > current.Value && current.Right != nil {
+		return t.containsNode(current.Right, value)
 	}
-	if node.Value < current.Value && current.Left != nil {
-		return t.containsNode(current.Left, node)
+	if value < current.Value && current.Left != nil {
+		return t.containsNode(current.Left, value)
 	}
-	if node.Value == current.Value {
+	if value == current.Value {
 		return true
 	}
 	return false

@@ -56,7 +56,7 @@ func TestInsertRootChildren(t *testing.T) {
 
 func TestContainsOnEmptyTree(t *testing.T) {
 	tree := NewBinaryTree()
-	if contains := tree.Contains(NewNode(2, nil, nil)); contains != false {
+	if contains := tree.Contains(2); contains != false {
 		t.Errorf("Expected '%+v' actual '%+v'", contains, false)
 	}
 }
@@ -67,13 +67,13 @@ func TestContainsOnExistingChild(t *testing.T) {
 		tree.Insert(node)
 	}
 
-	if contains := tree.Contains(NewNode(2, nil, nil)); contains != true {
+	if contains := tree.Contains(2); contains != true {
 		t.Errorf("Expected '%+v' actual '%+v'", contains, true)
 	}
-	if contains := tree.Contains(NewNode(4, nil, nil)); contains != true {
+	if contains := tree.Contains(4); contains != true {
 		t.Errorf("Expected '%+v' actual '%+v'", contains, true)
 	}
-	if contains := tree.Contains(NewNode(8, nil, nil)); contains != true {
+	if contains := tree.Contains(8); contains != true {
 		t.Errorf("Expected '%+v' actual '%+v'", contains, true)
 	}
 }
@@ -84,7 +84,7 @@ func TestContainsOnMissingChild(t *testing.T) {
 		tree.Insert(node)
 	}
 
-	if contains := tree.Contains(NewNode(5, nil, nil)); contains != false {
+	if contains := tree.Contains(5); contains != false {
 		t.Errorf("Expected '%+v' actual '%+v'", contains, false)
 	}
 }
