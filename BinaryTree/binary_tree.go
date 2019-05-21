@@ -16,7 +16,7 @@ func (t *BinaryTree) Insert(node *Node) {
 	t.insertNode(t.Root, node)
 }
 
-func (t BinaryTree) Contains(value int) bool {
+func (t *BinaryTree) Contains(value int) bool {
 	if t.Root == nil {
 		return false
 	}
