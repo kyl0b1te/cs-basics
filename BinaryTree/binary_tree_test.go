@@ -137,3 +137,31 @@ func TestMaxOnMultipleChild(t *testing.T) {
 		t.Errorf("Expected '%+v' actual '%+v'", max.Value, 53)
 	}
 }
+
+func TestFindParentOnEmptyTree(t *testing.T) {
+	tree := NewBinaryTree()
+	if parent := tree.FindParent(5); parent != nil {
+		t.Errorf("Expected '%+v' actual '%+v'", nil, parent)
+	}
+}
+
+func TestFindParentOnRoot(t *testing.T) {
+	tree := NewBinaryTree(getNodes(5)...)
+	if parent := tree.FindParent(5); parent != nil {
+		t.Errorf("Expected '%+v' actual '%+v'", nil, parent)
+	}
+}
+
+// 32
+// 1 62
+//   54 71
+//  34    83
+func TestFindParentOnMultipleChild(t *testing.T) {
+	tree := NewBinaryTree(getNodes(32, 62, 1, 54, 71, 34, 83)...)
+	tests := map[int]int{1: 32, 62: 32, 54: 62, 71: 62, 34: 54, 83: 71}
+	for value, expected := range tests {
+		if par := tree.FindParent(value); par.Value != expected {
+			t.Errorf("Expected '%+v' actual '%+v'", expected, par.Value)
+		}
+	}
+}
