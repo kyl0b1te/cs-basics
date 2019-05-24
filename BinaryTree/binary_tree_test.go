@@ -93,3 +93,25 @@ func TestFindOnExistingChild(t *testing.T) {
 		}
 	}
 }
+
+func TestMinOnEmptyTree(t *testing.T) {
+	tree := NewBinaryTree()
+	if min := tree.Min(); min != nil {
+		t.Errorf("Expected '%+v' actual '%+v'", nil, min)
+	}
+}
+
+func TestMinOnRootOnly(t *testing.T) {
+	node := NewNode(2, nil, nil)
+	tree := NewBinaryTree(node)
+	if min := tree.Min(); min != node {
+		t.Errorf("Expected '%+v' actual '%+v'", node, min)
+	}
+}
+
+func TestFindOnMultipleChild(t *testing.T) {
+	tree := NewBinaryTree(getNodes(20, 6, 8, 43, 12, 53)...)
+	if min := tree.Min(); min.Value != 6 {
+		t.Errorf("Expected '%+v' actual '%+v'", min.Value, 6)
+	}
+}

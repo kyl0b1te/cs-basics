@@ -38,6 +38,26 @@ func (t *BinaryTree) Find(value int) *Node {
 	return t.search(t.Root, value)
 }
 
+func (t *BinaryTree) Min() *Node {
+	if t.Root == nil {
+		return nil
+	}
+	return t.iterate(t.Root, func (current *Node) (*Node, bool) {
+		if current.Left == nil {
+			return current, false
+		}
+		return current.Left, true
+	})
+}
+
+func (t BinaryTree) iterate(current *Node, fn func (node *Node) (*Node, bool)) *Node {
+	next, keep := fn(current)
+	if next != nil && keep == true {
+		return t.iterate(next, fn)
+	}
+	return next
+}
+
 func (t BinaryTree) search(current *Node, value int) *Node {
 	if value > current.Value && current.Right != nil {
 		return t.search(current.Right, value)
