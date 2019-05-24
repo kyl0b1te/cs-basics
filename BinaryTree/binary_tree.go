@@ -50,6 +50,18 @@ func (t *BinaryTree) Min() *Node {
 	})
 }
 
+func (t *BinaryTree) Max() *Node {
+	if t.Root == nil {
+		return nil
+	}
+	return t.iterate(t.Root, func (current *Node) (*Node, bool) {
+		if current.Right == nil {
+			return current, false
+		}
+		return current.Right, true
+	})
+}
+
 func (t BinaryTree) iterate(current *Node, fn func (node *Node) (*Node, bool)) *Node {
 	next, keep := fn(current)
 	if next != nil && keep == true {
