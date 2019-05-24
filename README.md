@@ -43,6 +43,11 @@ List of data realized data structures:
     if *P* is a parent node of *C*, then the key (the value) of *P* is either greater than or equal to (in a max heap) or less than or equal to (in a min heap) the key of *C*.
     _([wikipedia](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=2ahUKEwj2oNvYmObfAhWpd98KHZkNAwkQFjACegQIBhAK&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FHeap_(data_structure)&usg=AOvVaw1G_jbAavnc1nT0nQUqPzII))_
 
+- [BinaryTree](https://github.com/zhikiri/data-structures/tree/master/BinaryTree)
+
+    A binary tree is a tree data structure in which each node has at most two children, which are referred to as the `left child` and the `right child`. A recursive definition using just set theory notions is that a (non-empty) binary tree is a tuple *(L, S, R)*, where *L* and *R* are binary trees or the empty set and *S* is a singleton set. Some authors allow the binary tree to be the empty set as well.
+    _([wikipedia](https://en.wikipedia.org/wiki/Binary_tree))
+
 ## Summary
 
 Project is in "work in progress" stage, I'll continue add a new data structures here.
