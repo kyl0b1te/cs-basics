@@ -1,9 +1,11 @@
 package binarytree
 
+// BinaryTree represents an correcponding abstract data structure
 type BinaryTree struct {
 	Root *Node
 }
 
+// NewBinaryTree is a function that creates new "instance" for structure
 func NewBinaryTree(nodes ...*Node) BinaryTree {
 	if len(nodes) == 0 {
 		return BinaryTree{nil}
@@ -16,6 +18,7 @@ func NewBinaryTree(nodes ...*Node) BinaryTree {
 	return tree
 }
 
+// Insert is a function that insert new BT node into the tree
 func (t *BinaryTree) Insert(node *Node) {
 	if t.Root == nil {
 		t.Root = node
@@ -24,6 +27,7 @@ func (t *BinaryTree) Insert(node *Node) {
 	t.insertNode(t.Root, node)
 }
 
+// Contains is a function that checks does value exist in a tree
 func (t *BinaryTree) Contains(value int) bool {
 	if t.Root == nil {
 		return false
@@ -31,6 +35,7 @@ func (t *BinaryTree) Contains(value int) bool {
 	return t.search(t.Root, value) != nil
 }
 
+// Find is a function that search a tree and return target node if it's exist
 func (t *BinaryTree) Find(value int) *Node {
 	if t.Root == nil {
 		return nil
@@ -38,6 +43,7 @@ func (t *BinaryTree) Find(value int) *Node {
 	return t.search(t.Root, value)
 }
 
+// FindParent is a function that returns node parent for specific value
 func (t *BinaryTree) FindParent(value int) *Node {
 	if t.Root == nil || t.Root.Value == value {
 		return nil
@@ -59,6 +65,7 @@ func (t *BinaryTree) FindParent(value int) *Node {
 	})
 }
 
+// Min is a function that returns tree minimum value
 func (t *BinaryTree) Min() *Node {
 	if t.Root == nil {
 		return nil
@@ -71,6 +78,7 @@ func (t *BinaryTree) Min() *Node {
 	})
 }
 
+// Min is a function that returns tree maximum value
 func (t *BinaryTree) Max() *Node {
 	if t.Root == nil {
 		return nil
@@ -83,6 +91,7 @@ func (t *BinaryTree) Max() *Node {
 	})
 }
 
+// Delete is a function that delete value from the tree
 func (t *BinaryTree) Delete(value int) bool {
 	if t.Root == nil {
 		return false
