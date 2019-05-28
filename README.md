@@ -5,7 +5,7 @@ In the scope of this project I'll implement some well-known abstract data struct
 
 ## Content
 
-List of data structures that was done:
+Data structures that was implemented:
 
 - *[Linked List](https://github.com/zhikiri/data-structs/tree/master/linkedlist)*
 
