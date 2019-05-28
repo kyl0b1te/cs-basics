@@ -4,14 +4,6 @@ import (
 	"testing"
 )
 
-func getNodes(values ...int) []*Node {
-	nodes := make([]*Node, len(values))
-	for _, value := range values {
-		nodes = append(nodes, NewNode(value, nil, nil))
-	}
-	return nodes
-}
-
 func TestNewBinaryTreeWithoutArguments(t *testing.T) {
 	tree := NewBinaryTree()
 	if tree.Root != nil {
