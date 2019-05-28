@@ -165,3 +165,42 @@ func TestFindParentOnMultipleChild(t *testing.T) {
 		}
 	}
 }
+
+func TestDeleteOnEmptyTree(t *testing.T) {
+	tree := NewBinaryTree()
+	if actual := tree.Delete(0); actual != false {
+		t.Errorf("Expected '%+v' actual '%+v'", false, actual)
+	}
+}
+
+func TestDeleteOnExistingRoot(t *testing.T) {
+	tree := NewBinaryTree(getNodes(10)...)
+	if actual := tree.Delete(10); actual != true {
+		t.Errorf("Expected '%+v' actual '%+v'", true, actual)
+	}
+	if tree.Root != nil {
+		t.Errorf("Expected '%+v' actual '%+v'", nil, tree.Root)
+	}
+}
+
+func TestDeleteOnMissingValue(t *testing.T) {
+	tree := NewBinaryTree(getNodes(10, 15, 25)...)
+	if actual := tree.Delete(8); actual != false {
+		t.Errorf("Expected '%+v' actual '%+v'", false, actual)
+	}
+}
+
+func TestDeleteOnMultipleChild(t *testing.T) {
+	values := []int{10, 54, 14, 61, 45, 93, 76}
+	tree := NewBinaryTree(getNodes(values...)...)
+
+	for i := len(values) - 1; i >= 0; i -= 1 {
+		value := values[i]
+		if actual := tree.Delete(value); actual != true {
+			t.Errorf("Delete value %d expected to be '%+v' actual '%+v'", value, true, actual)
+		}
+	}
+	if tree.Root != nil {
+		t.Errorf("Expected '%+v' actual '%+v'", nil, tree.Root)
+	}
+}

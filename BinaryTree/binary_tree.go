@@ -83,6 +83,25 @@ func (t *BinaryTree) Max() *Node {
 	})
 }
 
+func (t *BinaryTree) Delete(value int) bool {
+	if t.Root == nil {
+		return false
+	}
+	if t.Root.Value == value {
+		t.Root = nil
+		return true
+	}
+	parent := t.FindParent(value)
+	if parent == nil {
+		return false
+	}
+	if parent.Value > value {
+		parent.Left = nil
+	}
+	parent.Right = nil
+	return true
+}
+
 func (t BinaryTree) iterate(current *Node, fn func (node *Node) (*Node, bool)) *Node {
 	next, keep := fn(current)
 	if next != nil && keep == true {
