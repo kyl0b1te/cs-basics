@@ -6,7 +6,7 @@ type BinaryTree struct {
 }
 
 // NewBinaryTree is a function that creates new "instance" for structure
-func NewBinaryTree(nodes ...*Node) BinaryTree {
+func NewBinaryTree(nodes ...int) BinaryTree {
 	if len(nodes) == 0 {
 		return BinaryTree{nil}
 	}
@@ -19,7 +19,8 @@ func NewBinaryTree(nodes ...*Node) BinaryTree {
 }
 
 // Insert is a function that insert new BT node into the tree
-func (t *BinaryTree) Insert(node *Node) {
+func (t *BinaryTree) Insert(value int) {
+	node := NewNode(value, nil, nil)
 	if t.Root == nil {
 		t.Root = node
 		return
