@@ -40,6 +40,9 @@ func (g *Graph) AddEdge(label string, x, y int) {
 	g.edges[label] = edge
 	xVertex.Edges = append(xVertex.Edges, &edge)
 	yVertex.Edges = append(yVertex.Edges, &edge)
+
+	g.vertexes[x] = *xVertex
+	g.vertexes[y] = *yVertex
 }
 
 func (g *Graph) getVertex(value int) *Vertex {

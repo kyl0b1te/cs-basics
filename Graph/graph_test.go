@@ -1,6 +1,15 @@
 package graph
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
+
+func assert(t *testing.T, condition bool, err string) {
+	if !condition {
+		t.Error(err)
+	}
+}
 
 func TestNewGraphWithoutValues(t *testing.T) {
 	graph := NewGraph()
@@ -59,4 +68,23 @@ func TestRemoveVertex(t *testing.T) {
 		i--
 		test(value, i)
 	}
+}
+
+func TestAddEdgeForExistingVertexes(t *testing.T) {
+	graph := NewGraph(1, 2, 3, 4, 5)
+
+	graph.AddEdge("t01", 1, 3)
+	assert(t, len(graph.edges) == 1, "1 graph edge should be created")
+
+	edge, exists := graph.edges["t01"]
+	assert(t, exists, "`t01` edge label should exist")
+
+	msg := fmt.Sprintf("Edge vertexes values should be `%d` and `%d`", 1, 3)
+	assert(t, edge.X.Value == 1 && edge.Y.Value == 3, msg)
+
+	msg = fmt.Sprintf("X Vertex should hold edge reference")
+	assert(t, *graph.vertexes[1].Edges[0] == edge, msg)
+
+	msg = fmt.Sprintf("Y Vertex should hold edge reference")
+	assert(t, *graph.vertexes[3].Edges[0] == edge, msg)
 }
