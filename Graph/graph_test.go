@@ -108,3 +108,24 @@ func TestAddEdgeForNewVertexes(t *testing.T) {
 	assert(t, yOk == true, "`Y` vertex should be created automatically")
 	assert(t, *y.Edges[0] == edge, "`Y` vertex should should have edge")
 }
+
+func TestRemoveEdge(t *testing.T) {
+	graph := NewGraph(4, 7, 2, 6, 1, 9)
+	tests := map[string][]int{ "t01": []int{4, 2}, "t02": []int{7, 6}, "t03": []int{1, 9} }
+	for label, values := range tests {
+		graph.AddEdge(label, values[0], values[1])
+	}
+
+	for label, values := range tests {
+		graph.RemoveEdge(label)
+
+		_, exists := graph.edges[label]
+		assert(t, !exists, fmt.Sprintf("`%s` edge label shouldn't exist", label))
+
+		msg := fmt.Sprintf("Edges array should be empty, %+v", graph.vertexes[values[0]].Edges)
+		assert(t, len(graph.vertexes[values[0]].Edges) == 0, msg)
+
+		msg = fmt.Sprintf("Edges array should be empty, %+v", graph.vertexes[values[1]].Edges)
+		assert(t, len(graph.vertexes[values[1]].Edges) == 0, msg)
+	}
+}
