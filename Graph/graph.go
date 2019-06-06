@@ -56,6 +56,20 @@ func (g *Graph) RemoveEdge(label string) {
 	g.removeVertexEdge(edge.Y, edge)
 }
 
+func (g *Graph) Neighbors(value int) []int {
+	vertex := g.getVertex(value)
+
+	neighbors := make([]int, len(vertex.Edges))
+	for _, edge := range vertex.Edges {
+		if edge.X.Value == value {
+			neighbors = append(neighbors, edge.Y.Value)
+			continue;
+		}
+		neighbors = append(neighbors, edge.X.Value)
+	}
+	return neighbors
+}
+
 func (g *Graph) getVertex(value int) *Vertex {
 	vertex, ok := g.vertexes[value]
 	if !ok {
