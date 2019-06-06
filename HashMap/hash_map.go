@@ -2,7 +2,7 @@ package hashmap
 
 import "github.com/zhikiri/cs-basics/LinkedList"
 
-// HashMap represents an correcponding abstract data structure
+// HashMap represents a corresponding abstract data structure
 type HashMap struct {
 	size    int
 	buckets []*linkedlist.LinkedList

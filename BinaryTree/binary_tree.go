@@ -1,6 +1,6 @@
 package binarytree
 
-// BinaryTree represents an correcponding abstract data structure
+// BinaryTree represents a corresponding abstract data structure
 type BinaryTree struct {
 	Root *Node
 }
