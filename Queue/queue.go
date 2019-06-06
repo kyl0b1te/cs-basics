@@ -1,6 +1,6 @@
 package queue
 
-import "github.com/zhikiri/data-structures/LinkedList"
+import "github.com/zhikiri/cs-basics/LinkedList"
 
 // Queue represents abstract data structure
 type Queue struct {

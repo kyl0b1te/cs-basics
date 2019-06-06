@@ -1,6 +1,6 @@
 package hashmap
 
-import "github.com/zhikiri/data-structures/LinkedList"
+import "github.com/zhikiri/cs-basics/LinkedList"
 
 // HashMap represents an correcponding abstract data structure
 type HashMap struct {
