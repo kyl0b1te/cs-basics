@@ -48,6 +48,11 @@ Data structures that was implemented:
     A binary tree is a tree data structure in which each node has at most two children, which are referred to as the `left child` and the `right child`. A recursive definition using just set theory notions is that a (non-empty) binary tree is a tuple *(L, S, R)*, where *L* and *R* are binary trees or the empty set and *S* is a singleton set. Some authors allow the binary tree to be the empty set as well.
     _([wikipedia](https://en.wikipedia.org/wiki/Binary_tree))_
 
+- *[Graph](https://github.com/zhikiri/data-structures/tree/master/Graph)*
+
+    A graph is an abstract data type that is meant to implement the undirected graph and directed graph concepts from mathematics; specifically,the field of graph theory. A graph data structure consists of a finite (and possibly mutable) set of `vertices` (also called _nodes_ or _points_), together with a set of unordered pairs of these vertices for an undirected graph or a set of ordered pairs for a directed graph. These pairs are known as `edges` (also called _links_ or _lines_), and for a directed graph are also known as _arrows_.
+    _([wikipedia](https://en.wikipedia.org/wiki/Graph_(abstract_data_type)))_
+
 ## Summary
 
 Project is in "work in progress" stage, I'll continue add a new data structures here.
