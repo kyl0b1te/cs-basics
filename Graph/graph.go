@@ -59,7 +59,7 @@ func (g *Graph) RemoveEdge(label string) {
 func (g *Graph) Neighbors(value int) []int {
 	vertex := g.getVertex(value)
 
-	neighbors := make([]int, len(vertex.Edges))
+	var neighbors []int
 	for _, edge := range vertex.Edges {
 		if edge.X.Value == value {
 			neighbors = append(neighbors, edge.Y.Value)
