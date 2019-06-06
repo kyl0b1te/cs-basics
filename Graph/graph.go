@@ -1,10 +1,24 @@
 package graph
 
+// Graph represents a corresponding abstract data structure
 type Graph struct {
 	vertexes map[int]Vertex
 	edges map[string]Edge
 }
 
+// Vertex represents a graph node
+type Vertex struct {
+	Value int
+	Edges []*Edge
+}
+
+// Vertex represents a graph relation
+type Edge struct {
+	Label string
+	X, Y *Vertex
+}
+
+// NewGraph is a function that creates new "instance" for structure
 func NewGraph(values ...int) *Graph {
 	graph := &Graph{
 		make(map[int]Vertex),
@@ -19,14 +33,17 @@ func NewGraph(values ...int) *Graph {
 	return graph
 }
 
+// AddVertex is a function that creates new vertex with provided value
 func (g *Graph) AddVertex(value int) {
 	g.vertexes[value] = Vertex{value, []*Edge{}}
 }
 
+// RemoveVertex is a function that removes vertex by provided value
 func (g *Graph) RemoveVertex(value int) {
 	delete(g.vertexes, value)
 }
 
+// AddEdge is a function that set relation between 2 vertexes
 func (g *Graph) AddEdge(label string, x, y int) {
 	xVertex := g.getVertex(x)
 	yVertex := g.getVertex(y)
@@ -45,6 +62,7 @@ func (g *Graph) AddEdge(label string, x, y int) {
 	g.vertexes[y] = *yVertex
 }
 
+// RemoveEdge is a function that removes previously set relation
 func (g *Graph) RemoveEdge(label string) {
 	edge, exist := g.edges[label]
 	if !exist {
@@ -56,6 +74,7 @@ func (g *Graph) RemoveEdge(label string) {
 	g.removeVertexEdge(edge.Y, edge)
 }
 
+// Neighbors is a function that returns list of vertex related values
 func (g *Graph) Neighbors(value int) []int {
 	vertex := g.getVertex(value)
 
