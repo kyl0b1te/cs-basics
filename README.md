@@ -1,11 +1,12 @@
-# Abstract data structures
+# Computer Science Basics
 
-Learning the basics here.
-In the scope of this project I'll implement some well-known abstract data structures.
+Computer science basics learn and practice project.
+I've created this project for practice in Golang and CS basics.
+TDD is big part of the project ideology, I'm trying to follow it and realize `pros` and `cons`.
 
-## Content
+## Index
 
-Data structures that was implemented:
+### Abstract Data Structures:
 
 - *[Linked List](https://github.com/zhikiri/data-structs/tree/master/linkedlist)*
 
