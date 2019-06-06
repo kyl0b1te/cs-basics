@@ -69,7 +69,7 @@ func (g *Graph) removeVertexEdge(vertex *Vertex, edge Edge) {
 	for i, vEdge := range vertex.Edges {
 		if *vEdge == edge {
 			vertex.Edges[i] = vertex.Edges[len(vertex.Edges) - 1] // Copy last element to target position
-			vertex.Edges[len(vertex.Edges) - 1] = nil
+			vertex.Edges = vertex.Edges[:len(vertex.Edges)-1]
 			break
 		}
 	}
