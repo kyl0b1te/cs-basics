@@ -45,6 +45,17 @@ func (g *Graph) AddEdge(label string, x, y int) {
 	g.vertexes[y] = *yVertex
 }
 
+func (g *Graph) RemoveEdge(label string) {
+	edge, exist := g.edges[label]
+	if !exist {
+		// Edge is not exist
+		return
+	}
+	delete(g.edges, label)
+	g.removeVertexEdge(edge.X, edge)
+	g.removeVertexEdge(edge.Y, edge)
+}
+
 func (g *Graph) getVertex(value int) *Vertex {
 	vertex, ok := g.vertexes[value]
 	if !ok {
@@ -52,4 +63,15 @@ func (g *Graph) getVertex(value int) *Vertex {
 		return g.getVertex(value)
 	}
 	return &vertex
+}
+
+func (g *Graph) removeVertexEdge(vertex *Vertex, edge Edge) {
+	for i, vEdge := range vertex.Edges {
+		if *vEdge == edge {
+			vertex.Edges[i] = vertex.Edges[len(vertex.Edges) - 1] // Copy last element to target position
+			vertex.Edges[len(vertex.Edges) - 1] = nil
+			break
+		}
+	}
+	g.vertexes[vertex.Value] = *vertex
 }
