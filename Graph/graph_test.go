@@ -129,3 +129,21 @@ func TestRemoveEdge(t *testing.T) {
 		assert(t, len(graph.vertexes[values[1]].Edges) == 0, msg)
 	}
 }
+
+func TestNeighbors(t *testing.T) {
+	graph := NewGraph(7, 2, 6, 1, 3, 8)
+	tests := map[string][]int{ "t01": []int{7, 6}, "t02": []int{2, 1}, "t03": []int{1, 8} }
+	for label, values := range tests {
+		graph.AddEdge(label, values[0], values[1])
+	}
+
+	nrs := graph.Neighbors(7)
+	assert(t, len(nrs) == 1, fmt.Sprintf("Expected 1, actual %+v", len(nrs)))
+	assert(t, nrs[0] == 6, fmt.Sprintf("Expected 6, actual %+v", nrs))
+
+	nrs = graph.Neighbors(1)
+	assert(t, len(nrs) == 2, fmt.Sprintf("Expected 2, actual %+v", len(nrs)))
+	for _, val := range nrs {
+		assert(t, val == 8 || val == 2, fmt.Sprintf("Expected 2 and 8, actual %+v", val))
+	}
+}
