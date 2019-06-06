@@ -88,3 +88,23 @@ func TestAddEdgeForExistingVertexes(t *testing.T) {
 	msg = fmt.Sprintf("Y Vertex should hold edge reference")
 	assert(t, *graph.vertexes[3].Edges[0] == edge, msg)
 }
+
+func TestAddEdgeForNewVertexes(t *testing.T) {
+	graph := NewGraph(1, 2, 3, 4, 5)
+
+	graph.AddEdge("t01", 8, 9)
+
+	edge, exists := graph.edges["t01"]
+	assert(t, exists, "`t01` edge label should exist")
+
+	msg := fmt.Sprintf("Edge vertexes values should be `%d` and `%d`", 8, 9)
+	assert(t, edge.X.Value == 8 && edge.Y.Value == 9, msg)
+
+	x, xOk := graph.vertexes[8];
+	assert(t, xOk == true, "`X` vertex should be created automatically")
+	assert(t, *x.Edges[0] == edge, "`X` vertex should should have edge")
+
+	y, yOk := graph.vertexes[9];
+	assert(t, yOk == true, "`Y` vertex should be created automatically")
+	assert(t, *y.Edges[0] == edge, "`Y` vertex should should have edge")
+}
