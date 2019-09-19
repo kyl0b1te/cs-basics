@@ -2,39 +2,33 @@ package stack
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewStack(t *testing.T) {
 	stack := NewStack()
-	if stack.list == nil {
-		t.Error("Stack should not be empty")
-	}
+	assert.NotNil(t, stack.list)
 }
 
 func TestIsEmptyOnEmptyStack(t *testing.T) {
 	stack := NewStack()
-	if stack := stack.IsEmpty(); stack != true {
-		t.Errorf("Expected '%+v' actual '%+v'", true, stack)
-	}
+	assert.True(t, stack.IsEmpty())
 }
 
 func TestIsEmptyOnFilledStack(t *testing.T) {
 	stack := NewStack()
 	stack.Push(1)
-	if notEmpty := stack.IsEmpty(); notEmpty != false {
-		t.Errorf("Expected '%+v' actual '%+v'", false, notEmpty)
-	}
+	assert.False(t, stack.IsEmpty())
 }
 
 func TestPush(t *testing.T) {
 	stack := NewStack()
-	n10 := stack.Push(10)
-	if stack.list.Head != n10 {
-		t.Errorf("Expected '%+v' actual '%+v'", n10, stack.list.Head)
-	}
-	n20 := stack.Push(20)
-	if stack.list.Head != n20 {
-		t.Errorf("Expected '%+v' actual '%+v'", n20, stack.list.Head)
+
+	tests := []int{1, 2, 3}
+	for _, val := range tests {
+		node := stack.Push(val)
+		assert.Equal(t, node, stack.list.Head)
 	}
 }
 
@@ -43,13 +37,7 @@ func TestPop(t *testing.T) {
 	n10 := stack.Push(10)
 	n20 := stack.Push(20)
 
-	if node := stack.Pop(); node != n20 {
-		t.Errorf("Expected '%+v' actual '%+v'", n20, node)
-	}
-	if node := stack.Pop(); node != n10 {
-		t.Errorf("Expected '%+v' actual '%+v'", n10, node)
-	}
-	if node := stack.Pop(); node != nil {
-		t.Errorf("Expected '%+v' actual '%+v'", nil, node)
-	}
+	assert.Equal(t, n20, stack.Pop())
+	assert.Equal(t, n10, stack.Pop())
+	assert.Nil(t, stack.Pop())
 }
